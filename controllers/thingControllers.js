@@ -1,17 +1,19 @@
-const { Thing } = require("../db/models/Thing");
+const { Thing } = require("../db/models/");
 
-exports.thingList = async (req, res, next) => {
+exports.fetchThing = async (thingId, next) => {
   try {
-    const things = await Thing.findAll();
-    res.json(things);
+    const found = await Thing.findByPk(thingId);
+    return found;
   } catch (error) {
     next(error);
   }
 };
 
-exports.fetchThing = async (next, thingId) => {
+exports.thingList = async (req, res, next) => {
   try {
-    return (found = await Thing.findByPk(thingId));
+    const things = await Thing.findAll();
+
+    res.json(things);
   } catch (error) {
     next(error);
   }

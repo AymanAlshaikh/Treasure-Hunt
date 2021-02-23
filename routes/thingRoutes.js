@@ -1,15 +1,15 @@
+const express = require("express");
+const router = express.Router();
 const {
   thingList,
   newThing,
   removeThing,
   fetchThing,
+  thingDetail,
 } = require("../controllers/thingControllers");
 
-const express = require("express");
-const router = express.Router();
-
-router.param("thingID", async (req, res, next, thingId) => {
-  const thing = fetchThing(thingId, next);
+router.param("thingId", async (req, res, next, thingId) => {
+  const thing = await fetchThing(thingId, next);
   if (thing) {
     req.whatever = thing;
     next();
@@ -19,6 +19,6 @@ router.param("thingID", async (req, res, next, thingId) => {
 });
 router.get("/", thingList);
 router.post("/", newThing);
-router.delete("/thingId", removeThing);
+router.delete("/:thingId", removeThing);
 
 module.exports = router;
