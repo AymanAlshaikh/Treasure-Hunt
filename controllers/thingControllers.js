@@ -11,9 +11,19 @@ exports.fetchThing = async (thingId, next) => {
 
 exports.thingList = async (req, res, next) => {
   try {
-    const things = await Thing.findAll();
+    const things = await Thing.findAll({ where: { treasure: false } });
 
     res.json(things);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.treasureList = async (req, res, next) => {
+  try {
+    const treasures = await Thing.findAll({ where: { treasure: true } });
+
+    res.json(treasures);
   } catch (error) {
     next(error);
   }

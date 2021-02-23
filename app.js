@@ -9,12 +9,15 @@ const app = express();
 const thingRoutes = require("./routes/thingRoutes");
 const userRoutes = require("./routes/userRoutes");
 const { localStrategy } = require("./middleware/passport");
+const jwtStrategy = require("./middleware/passport");
 
 app.use(passport.initialize());
 passport.use(localStrategy);
+passport.use(jwtStrategy);
+
 app.use(bodyParser.json());
 app.use(cors());
-app.use("/things", thingRoutes);
+app.use("/", thingRoutes);
 app.use(userRoutes);
 
 app.use((req, res, next) => {
