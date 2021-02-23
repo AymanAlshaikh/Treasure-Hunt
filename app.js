@@ -8,8 +8,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const thingRoutes = require("./routes/thingRoutes");
 const userRoutes = require("./routes/userRoutes");
-const { localStrategy } = require("./middleware/passport");
-const jwtStrategy = require("./middleware/passport");
+const { localStrategy, jwtStrategy } = require("./middleware/passport");
 
 app.use(passport.initialize());
 passport.use(localStrategy);

@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "ahmedabdeen",
-    "password": "",
+    "username": "postgres",
+    "password": "654321",
     "database": "treasure_db",
     "host": "127.0.0.1",
     "dialect": "postgres",
