@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const { User } = require("../db/models/");
 const jwt = require("jsonwebtoken");
 
-const { JWT_SECRET, JWT_EXPIRATION_MS } = require("./config/keys");
+const { JWT_SECRET, JWT_EXPIRATION_MS } = require("../config/keys");
 
 exports.signUp = async (req, res, next) => {
   const { password } = req.body;
@@ -28,8 +28,6 @@ exports.signIn = async (req, res, next) => {
   const payload = {
     id: user.id,
     username: user.username,
-    // password: user.password,
-    // email: user.email,
     exp: Date.now() + parseInt(JWT_EXPIRATION_MS),
   };
   const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);

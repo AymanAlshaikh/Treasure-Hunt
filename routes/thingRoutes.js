@@ -19,11 +19,7 @@ router.param("thingId", async (req, res, next, thingId) => {
   }
 });
 router.get("/things", thingList);
-router.get(
-  "/treasures",
-  passport.authenticate("jwt", { session: false }),
-  treasureList
-);
+router.get("/treasures", treasureList);
 router.post("/", newThing);
 router.delete("/:thingId", removeThing);
 
