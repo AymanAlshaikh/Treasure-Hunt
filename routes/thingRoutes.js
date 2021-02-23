@@ -2,11 +2,12 @@ const express = require("express");
 const router = express.Router();
 const {
   thingList,
+  treasureList,
   newThing,
   removeThing,
   fetchThing,
-  thingDetail,
 } = require("../controllers/thingControllers");
+const passport = require("passport");
 
 router.param("thingId", async (req, res, next, thingId) => {
   const thing = await fetchThing(thingId, next);
@@ -17,7 +18,12 @@ router.param("thingId", async (req, res, next, thingId) => {
     next({ message: "thing does not exist", status: 404 });
   }
 });
-router.get("/", thingList);
+router.get("/things", thingList);
+router.get(
+  "/treasures",
+  passport.authenticate("jwt", { session: false }),
+  treasureList
+);
 router.post("/", newThing);
 router.delete("/:thingId", removeThing);
 

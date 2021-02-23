@@ -2,7 +2,14 @@ const Users = (sequelize, DataType) => {
   const User = sequelize.define(
     "User",
     {
-      username: { type: DataType.STRING, unique: true, allowNull: false },
+      username: {
+        type: DataType.STRING,
+        unique: {
+          args: true,
+          msg: "Username already exists",
+        },
+        allowNull: false,
+      },
       password: { type: DataType.STRING, allowNull: false },
       email: {
         type: DataType.STRING,
